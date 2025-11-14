@@ -1,0 +1,62 @@
+use anchor_lang::prelude::*;
+
+declare_id!("Fg6PaFpoGXkYsidMpWxqSWf...replace_with_demo_id");
+
+#[program]
+pub mod upgrade_manager {
+    use super::*;
+
+    pub fn propose_upgrade(ctx: Context<ProposeUpgrade>, new_program_buffer: Pubkey, description: String) -> Result<()> {
+        // simple placeholder: store proposal in account
+        Ok(())
+    }
+
+    pub fn approve_upgrade(ctx: Context<ApproveUpgrade>, proposal_id: u64) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn execute_upgrade(ctx: Context<ExecuteUpgrade>, proposal_id: u64) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn cancel_upgrade(ctx: Context<CancelUpgrade>, proposal_id: u64) -> Result<()> {
+        Ok(())
+    }
+
+    pub fn migrate_account(ctx: Context<MigrateAccount>, old_account: Pubkey) -> Result<()> {
+        Ok(())
+    }
+}
+
+// Define account structs here (skeleton only)
+#[account]
+pub struct UpgradeProposal {
+    pub id: u64,
+    pub proposer: Pubkey,
+    pub program: Pubkey,
+    pub new_buffer: Pubkey,
+    pub description: String,
+    pub proposed_at: i64,
+    pub timelock_until: i64,
+    pub approvals: Vec<Pubkey>,
+    pub approval_threshold: u8,
+    pub status: u8, // enum as u8 in skeleton
+    pub executed_at: Option<i64>,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq)]
+pub enum UpgradeStatus { Proposed, Approved, TimelockActive, Executed, Cancelled }
+
+// Context structs (examples)
+#[derive(Accounts)]
+pub struct ProposeUpgrade<'info> {
+    #[account(mut)]
+    pub proposer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)] pub struct ApproveUpgrade<'info> { pub approver: Signer<'info>, }
+#[derive(Accounts)] pub struct ExecuteUpgrade<'info> { pub executor: Signer<'info>, }
+#[derive(Accounts)] pub struct CancelUpgrade<'info> { pub canceller: Signer<'info>, }
+#[derive(Accounts)] pub struct MigrateAccount<'info> { pub migrator: Signer<'info>, }
+Note: This is a minimal skeleton. It compiles only after filling Cargo.toml and Anchor.toml correctly. See README for commands.
