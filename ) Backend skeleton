@@ -1,0 +1,8 @@
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("Upgrade management backend started (demo)");
+    // - expose simple HTTP endpoints
+    // - placeholder: POST /upgrade/propose, /:id/approve, /:id/execute, /:id/cancel
+    Ok(())
+}
+Add a Cargo.toml with tokio, axum (or warp) and sqlx (for Postgres) dependencies.
