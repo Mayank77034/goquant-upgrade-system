@@ -1,0 +1,2 @@
+•	Add unit test files in tests/ with simple asserts
+•	For Anchor program, use anchor test -- --nocapture (requires local Solana validator)
